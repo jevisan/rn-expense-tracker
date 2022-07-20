@@ -1,3 +1,4 @@
+import { Provider } from 'react-redux';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,8 +10,10 @@ import { GlobalStyles } from './constants/styles';
 import ManageExpense from './screens/ManageExpense';
 import RecentExpenses from './screens/RecentExpenses';
 import AllExpenses from './screens/AllExpenses';
+
 import IconButton from './components/UI/IconButton';
-import ExpensesContextProvider from './store/expenses-context';
+import { store } from './store/redux/store';
+// import ExpensesContextProvider from './store/context/expenses-context';
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -65,7 +68,8 @@ export default function App() {
   return (
     <>
       <StatusBar style='light' />
-      <ExpensesContextProvider>
+      {/* <ExpensesContextProvider> */}
+      <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
@@ -89,7 +93,8 @@ export default function App() {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </ExpensesContextProvider>
+        {/* </ExpensesContextProvider> */}
+      </Provider>
     </>
   );
 }
